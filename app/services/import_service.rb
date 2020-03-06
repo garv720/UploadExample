@@ -13,7 +13,7 @@ class ImportService
   end
 
   # Limit after which users will be saved
-  BATCH_IMPORT_SIZE = 200
+  BATCH_IMPORT_SIZE = 500
 
   def call
     book.sheets.each do |sheet|
@@ -31,7 +31,7 @@ class ImportService
       self.counter = 0
       self.sheet_failed = []
     end
-    return [failed, success_count, total_row_count]
+    return [failed, success_count, total_row_count, book.sheets.count]
   end
 
   private

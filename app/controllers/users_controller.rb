@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 		result = ImportService.new(file_path).call
 		@errors = result[0]
 		@success = result[1]
-		@total = result[2] - 1
+		@total = result[2] - result.last
 		@failed = @total - @success
 	end
 

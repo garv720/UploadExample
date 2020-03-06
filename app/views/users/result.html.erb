@@ -3,10 +3,10 @@
 <h2>Total: <%= @total %></h2>
 <h2>Success: <%= @success %></h2>
 <h2>Failure: <%= @failed %></h2>
+<div style="color: red">
+	<h2>Errors:</h2>
 
-<h2>Errors:</h2>
-
-<% @errors.each_with_index do |error, i| %>
+	<% @errors.each_with_index do |error, i| %>
 	<h4>Sheet-<%= i+1 %></h4>
 	<% error.map do |user| %>
 		<ul>
@@ -18,4 +18,5 @@
 			<% end %>
 		</ul>
 	<% end %>
-<% end %>
+	<% end %>
+</div>
