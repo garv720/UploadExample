@@ -21,8 +21,7 @@ class ImportService
       	self.counter += 1
       	if self.counter >= 2
           data = row["cells"].values
-          data = ["", "", ""] if data.blank?
-  	      records << build_new_record((data << row["r"]))
+  	      records << build_new_record(build_data(data, row["r"]))
   	      import_records if reached_batch_import_size? || reached_end_of_sheet?(sheet)
   	    end
       end
@@ -49,6 +48,20 @@ class ImportService
   # Total row count
   def row_count(sheet)
     rows(sheet).count
+  end
+
+  def build_data data, r
+    case data.size
+    when 0
+      data = ["", "", "", r]
+    when 1
+      data << ["", "", r]
+    when 2
+      data << ["", r]
+    when 3
+      data << r
+    end
+    data.flatten
   end
 
   # Build a new record
